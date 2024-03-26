@@ -10,8 +10,14 @@ class ProductManager {
     }
 
     addProduct(title, description, price, thumbnail, code, stock) {
-        const code_exists = this.products.find((product) => product.code === code) //this.products.includes(code)
-        if (!code_exists) {
+        const code_exists = this.products.find((product) => product.code === code)
+        const product_is_valid =  title && description && price && thumbnail && code && stock !== undefined
+        
+        if (!product_is_valid) {
+            console.log("No se pudo agregar el producto, todos los campos son obligatorios.")
+        } else if (code_exists) {
+            console.log("No se pudo agregar el producto, el código ya existe.")
+        } else {
             const id = this.products.length + 1
             const product = {
                 id: id,
@@ -23,26 +29,34 @@ class ProductManager {
                 stock,
             }
             this.products.push(product)
+            console.log("Producto agregado.")
             return
         }
-        console.log("El código ya existe.")
     }
 
     getProductById(id) {
-        const product_found = this.products.find((product)=> product.id===id) //this.products.includes(id)
+        const product_found = this.products.find((product)=> product.id===id)
         if (!product_found) {
             console.log("Not found.") 
             return
         }
         console.log(product_found) 
     }
+
 }
 
 const productManager = new ProductManager()
 
-const products = console.log(productManager.getProducts())
-productManager.addProduct("Producto prueba", "Este es un producto prueba", 200, "Sin imagen")
-const products2 = console.log(productManager.getProducts())
+console.log(productManager.getProducts())
+console.log("_________________________________________________________")
 productManager.addProduct("Producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25)
-productManager.getProductById(1)
+console.log("_________________________________________________________")
+console.log(productManager.getProducts())
+console.log("_________________________________________________________")
+productManager.addProduct("Producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25)
+console.log("_________________________________________________________")
+productManager.addProduct("Otro producto prueba", "Este es otro producto prueba", 100, "Sin imagen", "lalala")
+console.log("_________________________________________________________")
 productManager.getProductById(2)
+console.log("_________________________________________________________")
+productManager.getProductById(1)
