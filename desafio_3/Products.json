@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "Producto Uno",
+    "description": "Este es un producto 1",
+    "price": 200,
+    "thumbnail": "Sin imagen",
+    "code": "abc101",
+    "stock": 25
+  },
+  {
+    "id": 2,
+    "title": "Producto Dos",
+    "description": "Este es un producto 2",
+    "price": 150,
+    "thumbnail": "Sin imagen",
+    "code": "abc102",
+    "stock": 30
+  },
+  {
+    "id": 3,
+    "title": "Producto Tres",
+    "description": "Este es un producto 3",
+    "price": 450,
+    "thumbnail": "Sin imagen",
+    "code": "abc103",
+    "stock": 54
+  },
+  {
+    "id": 4,
+    "title": "Producto Cuatro",
+    "description": "Este es un producto 4",
+    "price": 240,
+    "thumbnail": "Sin imagen",
+    "code": "abc104",
+    "stock": 23
+  },
+  {
+    "id": 5,
+    "title": "Producto Cinco",
+    "description": "Este es un producto 5",
+    "price": 130,
+    "thumbnail": "Sin imagen",
+    "code": "abc105",
+    "stock": 45
+  },
+  {
+    "id": 6,
+    "title": "Producto Seis",
+    "description": "Este es un producto 6",
+    "price": 260,
+    "thumbnail": "Sin imagen",
+    "code": "abc106",
+    "stock": 86
+  },
+  {
+    "id": 7,
+    "title": "Producto Siete",
+    "description": "Este es un producto 7",
+    "price": 50,
+    "thumbnail": "Sin imagen",
+    "code": "abc107",
+    "stock": 35
+  },
+  {
+    "id": 8,
+    "title": "Producto Ocho",
+    "description": "Este es un producto 8",
+    "price": 230,
+    "thumbnail": "Sin imagen",
+    "code": "abc108",
+    "stock": 23
+  },
+  {
+    "id": 9,
+    "title": "Producto Nueve",
+    "description": "Este es un producto 9",
+    "price": 27,
+    "thumbnail": "Sin imagen",
+    "code": "abc109",
+    "stock": 86
+  },
+  {
+    "id": 10,
+    "title": "Producto Diez",
+    "description": "Este es un producto 10",
+    "price": 45,
+    "thumbnail": "Sin imagen",
+    "code": "abc110",
+    "stock": 24
+  }
+]
