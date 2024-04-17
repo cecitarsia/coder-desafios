@@ -52,10 +52,9 @@ app.get('/products', async (req, res) => {
 })
 
 // Get one product by ID
-app.get("/products/:pid", async (req, res) => {
-
+app.get('/products/:pid', async (req, res) => {
+    const pid = parseInt(req.params.pid);
     try {
-        let pid = parseInt(req.params.pid);
         const product = await manager.getProductById(pid);
         if (product) {
             res.json(product);

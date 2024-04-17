@@ -16,10 +16,12 @@ class ProductManager {
             if (!productIsValid) {
                 console.log("No se pudo agregar el producto, todos los campos son obligatorios.")
                 return;
-            } else if (codeExists) {
+            } 
+            
+            if (codeExists) {
                 console.log("No se pudo agregar el producto, el código ya existe.")
                 return;
-            } else {
+            } 
                 const id = this.products.length + 1
                 const product = {
                     id: id,
@@ -33,7 +35,7 @@ class ProductManager {
                 this.products.push(product)
                 await fs.writeFile(this.path, JSON.stringify(this.products, null, 2));
                 console.log("Producto agregado.")
-            }
+            
         } catch (error) {
             console.error("Error al agregar producto", error);
         }
@@ -64,11 +66,12 @@ class ProductManager {
     async getProductById(id) {
         try {
             const products = await this.getProducts()
-            const productFound = products.find((product) => product.id === id)
+            const productFound = await products.find((product) => product.id === id)
             if (!productFound) {
                 console.log("El producto buscado no existe.")
+            } else {
+                return productFound;
             }
-            return productFound;
         } catch (error) {
             console.error("ID de producto no encontrado", error);
         }
