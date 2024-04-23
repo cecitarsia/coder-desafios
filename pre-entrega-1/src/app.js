@@ -5,6 +5,8 @@ const app = express()
 const PORT = 8080
 const productsRouter = require("./routes/products.route.js")
 const cartsRouter = require("./routes/carts.route.js")
+const ProductManager = require('./managers/ProductManager.js')
+const productManager = new ProductManager(`${__dirname}/products.json`)
 
 
 //Middlewares 
