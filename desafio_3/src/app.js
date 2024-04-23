@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const PORT = 8080
 const ProductManager = require('./ProductManager.js')
-const manager = new ProductManager('./Products.json')
+const manager = new ProductManager(`${__dirname}/products.json`)
 
 manager.addProduct("Producto Uno", "Este es un producto 1", 200, "Sin imagen", "abc101", 25)
 manager.addProduct("Producto Dos", "Este es un producto 2", 150, "Sin imagen", "abc102", 30)

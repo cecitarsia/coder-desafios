@@ -2,9 +2,9 @@
 const fs = require('fs').promises;
 
 class ProductManager {
-    constructor() {
+    constructor(path) {
         this.products = []
-        this.path = "Products.json"
+        this.path = path
     }
 
 
@@ -68,7 +68,7 @@ class ProductManager {
             const products = await this.getProducts()
             const productFound = await products.find((product) => product.id === id)
             if (!productFound) {
-                console.log("El producto buscado no existe.")
+                return 'El producto buscado no existe'
             } else {
                 return productFound;
             }
@@ -79,7 +79,7 @@ class ProductManager {
 
     async updateProduct(id, value) {
         try {
-            const products = await this.readProducts()
+            const products = await this.getProducts()
             // const index = products.indexOf(p => p.id === id) //--> No entiendo xq no funciona este
             const index = products.findIndex(p => p.id === id)
             if(index !== -1) {
