@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "title": {
+      "title": "Gin Heredero",
+      "description": "Esta es una bebida",
+      "price": 45,
+      "code": "ABC101",
+      "status": true,
+      "stock": 28,
+      "category": "Destilados"
+    },
+    "status": true,
+    "thumbnails": []
+  },
+  {
+    "id": 2,
+    "title": {
+      "title": "Gin Otro",
+      "description": "Esta es una bebida",
+      "price": 45,
+      "code": "ABC102",
+      "status": true,
+      "stock": 20,
+      "category": "Destilados"
+    },
+    "status": true,
+    "thumbnails": []
+  }
+]

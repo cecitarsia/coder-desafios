@@ -1,33 +1,35 @@
 const fs = require('fs').promises;
 
 class ProductManager {
-    constructor(path) {
+    constructor() {
         this.products = []
-        this.path = path
+        this.path = 'Products.json'
     }
 
 
-    async addProduct(title, description, price, thumbnail, code, stock) {
+    async addProduct(title, description, code, price, status, stock, category, thumbnails) {
         try {
-            const codeExists = this.products.find((product) => product.code === code)
-            const productIsValid = title && description && price && thumbnail && code && stock
+            // const codeExists = this.products.find((product) => product.code === code)
+            // const productIsValid = title && description && price && code && stock && status && category
             
-            if (!productIsValid) {
-                throw new Error("No se pudo agregar el producto, todos los campos son obligatorios.")
-            } 
+            // if (!productIsValid) {
+            //     throw new Error("No se pudo agregar el producto, todos los campos son obligatorios.")
+            // } 
             
-            if (codeExists) {
-                throw new Error("No se pudo agregar el producto, el código ya existe.")
-            } 
+            // if (codeExists) {
+            //     throw new Error("No se pudo agregar el producto, el código ya existe.")
+            // } 
             const id = this.products.length + 1
             const product = {
                 id: id,
                 title,
                 description,
                 price,
-                thumbnail,
                 code,
+                status : true,
                 stock,
+                category,
+                thumbnails : [],    
                 }
                 this.products.push(product)
                 await fs.writeFile(this.path, JSON.stringify(this.products, null, 2));

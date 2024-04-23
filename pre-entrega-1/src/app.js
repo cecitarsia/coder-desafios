@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs').promises
 const express = require("express")
 const path = require("path")
 const app = express()
@@ -12,7 +12,7 @@ const productManager = new ProductManager(`${__dirname}/products.json`)
 //Middlewares 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use(express.static(path.join(__dirname, 'public')))
+// app.use(express.static(path.join(__dirname, 'public')))
 app.use("/", productsRouter)
 app.use("/", cartsRouter)
 
