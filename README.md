@@ -17,15 +17,25 @@ localhost:8080/products/:id
 localhost:8080/products
 
 En body:
+
   {
+  
     "title": "[title]",
+    
     "description": "[description]",
+    
     "code": "[code]”,
+    
     "price": [price],
+    
     "status": true,
+    
     "stock": [stock],
+    
     "category": "[category]",
+    
     "thumbnail": null
+    
    }
 - Update Product by ID
 localhost:8080/products/:id
