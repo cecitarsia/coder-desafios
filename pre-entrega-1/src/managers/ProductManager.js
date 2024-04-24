@@ -7,36 +7,37 @@ class ProductManager {
     }
 
 
-    async addProduct(title, description, code, price, status, stock, category, thumbnails) {
+    async addProduct(title, description, code, price, status = true, stock, category, thumbnail = null) {
         try {
-            // const codeExists = this.products.find((product) => product.code === code)
+            const codeExists = this.products.find((product) => product.code === code)
             // const productIsValid = title && description && price && code && stock && status && category
             
             // if (!productIsValid) {
-            //     throw new Error("No se pudo agregar el producto, todos los campos son obligatorios.")
+            //     return "No se pudo agregar el producto, todos los campos son obligatorios."
             // } 
             
-            // if (codeExists) {
-            //     throw new Error("No se pudo agregar el producto, el código ya existe.")
-            // } 
+            if (codeExists) {
+                return "No se pudo agregar el producto, el código ya existe."
+            } 
             const id = this.products.length + 1
             const product = {
                 id: id,
                 title,
                 description,
-                price,
                 code,
-                status : true,
+                price,
+                status,
                 stock,
                 category,
-                thumbnails : [],    
-                }
-                this.products.push(product)
+                thumbnail,
+            }
+            this.products.push(product)
                 await fs.writeFile(this.path, JSON.stringify(this.products, null, 2));
                 console.log("Producto agregado.")
-            
+                return product
+                
         } catch (error) {
-            console.error("Error al agregar producto", error.message);
+            console.error("Error al agregar producto", error);
         }
     }
 
@@ -94,7 +95,6 @@ class ProductManager {
     }
 
     async deleteProduct(id) {
-        let message = 'Producto eliminado.'
 
         try {
 			const products = await this.readProducts ();
@@ -108,10 +108,10 @@ class ProductManager {
 				console.log('Producto no encontrado.');
 			}
 
-			return message;
+			return "El producto ha sido eliminado"
 
         } catch (error) {   
-            console.log('No se pudo borrar el producto')  
+            console.log('No se pudo borrar el producto', error)  
         }
     }
 }
