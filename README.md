@@ -9,19 +9,19 @@
 
 - Get All Products
   
-localhost:8080/products
+localhost:8080/api/products
 
 - Get All Products with Limit
   
-localhost:8080/products?limit=[limit]
+localhost:8080/api/products?limit=[limit]
 
 - Get One Product by ID
   
-localhost:8080/products/:id
+localhost:8080/api/products/:id
 
 - Add Product
   
-localhost:8080/products
+localhost:8080/api/products
 
 
 En body:
@@ -48,28 +48,28 @@ En body:
    
 - Update Product by ID
   
-localhost:8080/products/:id
+localhost:8080/api/products/:id
 
 - Delete Product
   
-localhost:8080/products/:id
+localhost:8080/api/products/:id
 
 
 #### Carrito
 
 - Get All Carts
   
-localhost:8080/carts
+localhost:8080/api/carts
 
 - Get Cart by ID
   
-localhost:8080/carts/:id
+localhost:8080/api/carts/:id
 
 - Add Cart
   
-localhost:8080/carts
+localhost:8080/api/carts
 
 - Update Product in Cart by ID
   
-localhost:8080/carts/:id/product/:id
+localhost:8080/api/carts/:id/products/:id
 
