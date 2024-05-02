@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "title": "Gin Mare",
+    "description": "Un buen gin",
+    "code": "AAA111",
+    "price": "1000",
+    "status": "on",
+    "stock": "23",
+    "category": "destilados",
+    "thumbnail": null
+  }
+]

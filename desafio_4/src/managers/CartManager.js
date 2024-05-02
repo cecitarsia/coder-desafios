@@ -1,5 +1,5 @@
-const fs = require('fs').promises;
-const ProductManager = require('./ProductManager')
+import { promises as fs } from 'fs';
+import ProductManager from './ProductManager'
 const productManager = new ProductManager()
 
 class CartManager {
@@ -132,4 +132,4 @@ class CartManager {
 
 }
 
-module.exports = CartManager
+export default CartManager

@@ -1,13 +1,14 @@
+<div><strong>PRODUCTOS</strong></div>
 <div>
-    <input type="text" id="mensaje" placeholder="Escribe un mensaje">
-    <button id="btn-send" onclick="enviarMensaje()">Enviar</button>
+    <ol id="products"></ol>
 </div>
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="/public/index.js"></script>
+<script src="/js/index.js"></script>
 
 
-<script>
+
+{{!-- <script>
     const socket = io()
 
     function enviarMensaje() {
@@ -23,4 +24,4 @@
     socket.on('mensaje', (data) => {
         console.log(`mensaje recibido del servidor ${data}`)
     })
-</script>
+</script> --}}
