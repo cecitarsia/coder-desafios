@@ -1,59 +1,42 @@
-const socket = io()
+    const socket = io()
 
-// Funcionalidad y métodos del cliente
-socket.emit('message', "Comunicando desde WebSocket")
+    // Funcionalidad y métodos del cliente
+    socket.emit('message', "Comunicando desde WebSocket")
 
-// index
-// const productList = document.getElementById('products')
 
-// // socket.on('evento_para_todos', data => {
-// //     console.log(data)
-// // })
+    // realtimeproducts
+    const form = document.getElementById("form")
 
-// socket.on('products', products => {
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
 
-//     productList.innerHTML = ""
-    
-// })
+        const title = document.getElementById('title').value
+        const description = document.getElementById('description').value
+        const code = document.getElementById('code').value
+        const price = document.getElementById('price').value
+        const stock = document.getElementById('stock').value
+        const category = document.getElementById('category').value
 
-// realtimeproducts
-const form = document.getElementById("form")
-const addButton = document.getElementById('btn-add')
+        socket.emit('addProduct', { title, description, code, price, stock, category })
+        form.reset()
+    })
 
-form.addEventListener('submit', () => {
-    const title = document.getElementById('title').value
-    const description = document.getElementById('description').value
-    const code = document.getElementById('code').value
-    const price = document.getElementById('price').value
-    const stock = document.getElementById('stock').value
-    const category = document.getElementById('category').value
+    // Escuchar el evento 'productAdded' desde el servidor
+    socket.on('productAdded', (newProduct) => {
+        const newProductElement = document.createElement('li');
+        newProductElement.textContent = `${newProduct.id} - ${newProduct.title} - ${newProduct.price} - ${newProduct.description}`;
 
-    socket.emit('addProduct', { title, description, code, price, stock, category})
-
-})
-
-socket.on('realTimeProducts', products => {
-
-    const realTimeList = document.getElementById('realTimeProducts')
-
-    realTimeList.innerHTML = ``;
-    products.forEach(product => {
-        const newProduct = document.createElement('li');
+        // Crear un botón de eliminar para el nuevo producto
         const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Eliminar';
+        deleteButton.onclick = () => {
+            // Lógica para eliminar el producto
+            // Puedes emitir un evento al servidor para manejar la eliminación del producto
+        };
 
-        deleteButton.innerHTML = 'Eliminar';
-        deleteButton.addEventListener('click', () => {
-            socket.emit('deleteProduct', product.id)
-            console.log(product.id);
-        });
-        newProduct.innerHTML = 
-        `<strong>Título: </strong>${product.title}, 
-        <strong>Descripcion: </strong>${product.description},
-        <strong>Codigo: </strong>${product.code},
-        <strong>Precio: </strong>${product.price},
-        <strong>Stock: </strong>${product.stock},
-        <strong>Categoría: </strong>${product.category}`;
-        realTimeList.appendChild(newProduct);
-        realTimeList.appendChild(deleteButton);
+        // Agregar el botón de eliminar al nuevo elemento de lista
+        newProductElement.appendChild(deleteButton);
+
+        // Agregar el nuevo elemento de lista al listado de productos en tiempo real
+        document.getElementById('realtimeProductList').appendChild(newProductElement);
     });
-})

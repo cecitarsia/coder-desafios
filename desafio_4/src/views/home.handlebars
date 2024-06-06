@@ -1,0 +1,12 @@
+<div><strong>PRODUCTOS</strong></div>
+<div>
+    {{#each products}}
+    <div>
+        <p><strong>{{title}}</strong> - {{description}} - Stock: {{stock}} - Precio: ${{price}} </p>
+    </div>
+    <br />
+    {{/each}}
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>

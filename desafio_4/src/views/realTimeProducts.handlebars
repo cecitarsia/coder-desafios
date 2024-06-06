@@ -8,8 +8,8 @@
 </head>
 
 <body>
-<!--  Formulario para cargar productos  -->
-    <h1><strong>Cargar productos</strong></h1>
+    <!--  Formulario para cargar productos  -->
+    <h2>Cargar Productos</h2>
     <form action="/api/products" method="POST" id="form">
         <label for="title">Título:</label>
         <input type="text" id="title" name="title" required><br><br>
@@ -33,22 +33,28 @@
         <select id="category" name="category">
             <option value="vinos">Vinos</option>
             <option value="destilados">Destilados</option>
-        </select><br><br>   
+            <option value="cervezas">Cervezas</option>
+        </select><br><br>
         {{!-- <input type="text" id="category" name="category" required><br><br> --}}
         <div>
-        <button type="submit" id="btn-add">Cargar</button>
+            <button type="submit" id="btn-add">Cargar producto</button>
         </div>
     </form>
 
-<!--  Listado de los productos en tiempo real -->
-    <h2><strong>Listado Productos</strong></h2>
+    <!--  Listado de los productos en tiempo real -->
+    <h2>Productos Cargados</h2>
+    <ul id="realtimeProductList">
+        {{#each products}}
+        <li>{{id}} - {{title}} - {{price}} - {{description}}</li>
         <div>
-            <ol id="realTimeProducts"></ol>
+            <button onclick="deleteProduct('{{_id}}')" data-product-id="{{_id}}">Eliminar</button>
         </div>
+        {{/each}}
+    </ul>
 
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/index.js"></script>
-</body> 
+</body>
 
 </html>

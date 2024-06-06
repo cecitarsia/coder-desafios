@@ -1,13 +1,24 @@
 [
   {
     "id": 1,
-    "title": "Gin Mare",
-    "description": "Un buen gin",
-    "code": "AAA111",
-    "price": "1000",
+    "title": "Vino Tinto Viñas de Balbo",
+    "description": "Una Bebida",
+    "code": "ABC1001",
+    "price": "3200",
     "status": "on",
-    "stock": "23",
-    "category": "destilados",
+    "stock": "34",
+    "category": "vinos",
+    "thumbnail": null
+  },
+  {
+    "id": 2,
+    "title": "Pack X6 Cerveza Imperial Lager Lata 473ml",
+    "description": "Una Bebida",
+    "code": "ABC1002",
+    "price": "7200",
+    "status": "on",
+    "stock": "56",
+    "category": "cervezas",
     "thumbnail": null
   }
 ]

@@ -1,7 +1,8 @@
 import { Router } from 'express';
 const router = Router()
 import ProductManager from '../managers/ProductManager.js'
-const productManager = new ProductManager()
+const socket = io();
+const productManager = new ProductManager(socket)
 
 
 // Traer todos los productos con y sin limit

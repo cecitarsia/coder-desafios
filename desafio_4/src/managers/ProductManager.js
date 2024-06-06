@@ -1,9 +1,10 @@
 import { promises as fs } from 'fs';
 
 class ProductManager {
-    constructor() {
+    constructor(socket) {
         this.products = []
         this.path = 'Products.json'
+        this.socket = socket;
     }
 
 
@@ -34,6 +35,7 @@ class ProductManager {
             this.products.push(product)
                 await fs.writeFile(this.path, JSON.stringify(this.products, null, 2));
                 console.log("Producto agregado.")
+                socket.emit('productAdded', product);
                 return product
                 
         } catch (error) {
