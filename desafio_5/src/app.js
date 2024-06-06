@@ -1,25 +1,44 @@
 // IMPORTS   
 import express from 'express'
 import handlebars from 'express-handlebars'
-import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-dotenv.config()
-// console.log(process.env.MONGO_URL)
 import __dirname from './utils.js'
+import cookieParser from 'cookie-parser'
+import session from 'express-session'
+import mongoose from './config/database.js';
+import MongoStore from 'connect-mongo'
 import viewsRouter from './routes/views.router.js'
-import productsRouter from './routes/products.router.js'
-import cartsRouter from './routes/carts.router.js'
-import productModel from './dao/models/product.model.js'
+import productsRouter from './routes/api/products.router.js'
+import cartsRouter from './routes/api/carts.router.js'
+import sessionsRouter from './routes/api/sessions.router.js'
+dotenv.config()
 
 const app = express()
-const PORT = 8080
+const PORT = process.env.PORT
 const httpServer = app.listen(PORT, console.log(`Server running on port ${PORT}`))
 
 
+
+app.use(cookieParser())
+app.use(session({
+    //ttl: Time To Live = Vida de la sesión
+    //retries: # de veces que el servidor tratará de leer el archivo
+    //path: ruta donde vivirá la carpeta para almacenar las sesiones
+    // store: new fileStorage({path:'./sessions',ttl:100,retries:0}),
+    store: MongoStore.create({
+        mongoUrl:process.env.MONGO_URL,
+        mongoOptions:{useNewUrlParser:true,useUnifiedTopology:true},
+        ttl:15,
+    }),
+    secret: "secretkey",
+    resave:false,
+    saveUninitialized:false
+}))
+
+
+// Middlewares
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
-
 
 
 app.engine('handlebars', handlebars.engine())
@@ -31,14 +50,7 @@ app.use(express.static(__dirname + '/public'))
 app.use("/api/products", productsRouter)
 app.use("/api/carts", cartsRouter)
 app.use("/", viewsRouter)
+app.use("/api/sessions", sessionsRouter)
 
 
-// Dejé el link de Mongo acá porque me tira error en el .env argumentando que no es un String (independientemente de si lo pongo con "" o no)
-const environmment = async () => {
-    await mongoose.connect("mongodb+srv://ceciliatarsia:cvMYcDEh8AFWoIYQ@cluster0.t9jz5hn.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Cluster0")
-    .then(() => { console.log("Conectado a la base de datos") })
-    .catch(error => console.error("Error en la conexion", error))
-    // let response = await productModel.paginate({category:"Vinos"}, {limit:3, page:2})
-    // console.log(response)
-}
-environmment()
+

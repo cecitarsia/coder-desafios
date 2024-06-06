@@ -1,7 +1,6 @@
 import { Router } from 'express';
+import ProductManager from '../../dao/db/ProductManager.js'
 const router = Router()
-import ProductManager from '../dao/db/ProductManager.js'
-import productModel from '../dao/models/product.model.js';
 const productManager = new ProductManager()
 
 
@@ -45,7 +44,7 @@ router.put("/:pid", async (req, res) => {
 // Eliminar un producto por ID 
 router.delete("/:pid", async (req, res) => {
     let { pid } = req.params
-    let result = await productModel.deleteOne({ _id: pid })
+    let result = await productManager.deleteProduct(pid)
     res.send({ result: "success", payload: result })
 
 })

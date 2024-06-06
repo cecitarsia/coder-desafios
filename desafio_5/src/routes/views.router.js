@@ -1,13 +1,13 @@
 import { Router } from 'express';
-const router = Router()
-import productModel from '../dao/models/product.model.js';
 import cartModel from '../dao/models/cart.model.js';
 import ProductManager from '../dao/db/ProductManager.js'
+import { isAuthenticated, isNotAuthenticated } from '../middlewares/auth.js';
+
+const router = Router()
 const productManager = new ProductManager()
 
 
-
-// Trae la vista de todos los productos con paginacion
+// Trae la vista de todos los productos con auth
 router.get("/products",async(req,res)=>{
     let cid = "665780c00631c45cd5ec1dc4"
     let page = parseInt(req.query.page) || 1;
@@ -19,7 +19,6 @@ router.get("/products",async(req,res)=>{
     //res.render('products', { result, cartId: cid } )
 })
 
-
 // Trae la vista de un carrito con sus productos
 router.get('/carts/:cid', async(req, res) => {
     let cid = req.params.cid;
@@ -28,5 +27,18 @@ router.get('/carts/:cid', async(req, res) => {
     // No sé como pasarle el carrito ID acá
     res.render('carts', {products: result, cartId: cid });
 })
+
+
+router.get('/login', isNotAuthenticated, (req, res) => {
+    res.render('login');
+});
+
+router.get('/register', isNotAuthenticated, (req, res) => {
+    res.render('register');
+});
+
+router.get('/profile', isAuthenticated, (req, res) => {
+    res.render('profile', { user: req.session.user });
+});
 
 export default router
