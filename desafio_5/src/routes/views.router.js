@@ -8,14 +8,14 @@ const productManager = new ProductManager()
 
 
 // Trae la vista de todos los productos con auth
-router.get("/products",async(req,res)=>{
+router.get("/products", isAuthenticated, async(req,res)=>{
     let cid = "665780c00631c45cd5ec1dc4"
     let page = parseInt(req.query.page) || 1;
     let result = await productManager.getProducts(req.query);
     result.prevLink = result.hasPrevPage ? `http://localhost:8080/products?page=${result.prevPage}` : '';
     result.nextLink = result.hasNextPage ? `http://localhost:8080/products?page=${result.nextPage}` : '';
     result.isValid = !(page <= 0 || page > result.totalPages)
-    res.render('products', result )
+    res.render('products', { user: req.session.user, result } )
     //res.render('products', { result, cartId: cid } )
 })
 

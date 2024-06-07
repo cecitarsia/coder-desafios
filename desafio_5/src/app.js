@@ -46,7 +46,7 @@ app.set('views', __dirname + '/views')
 app.set('view engine', 'handlebars')
 app.use(express.static(__dirname + '/public'))
 
-// Llamo a las rutas
+// Rutas
 app.use("/api/products", productsRouter)
 app.use("/api/carts", cartsRouter)
 app.use("/", viewsRouter)
