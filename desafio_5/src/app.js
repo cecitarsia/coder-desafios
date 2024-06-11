@@ -27,7 +27,6 @@ app.use(session({
     // store: new fileStorage({path:'./sessions',ttl:100,retries:0}),
     store: MongoStore.create({
         mongoUrl:process.env.MONGO_URL,
-        mongoOptions:{useNewUrlParser:true,useUnifiedTopology:true},
         ttl:15,
     }),
     secret: "secretkey",
