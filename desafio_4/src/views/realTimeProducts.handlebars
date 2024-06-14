@@ -1,60 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+<div>
+    <h2>Cargar producto</h2>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Upload</title>
-</head>
+    <label for="title"> Título:</label>
+    <input type="text" name="title" id="title"><br/><br/>
+    <label for="description"> Descripción:</label>
+    <input type="text" name="decription" id="description"><br/><br/>
+    <label for="price"> Precio:</label>
+    <input type="text" name="price" id="price"><br/><br/>
+    <label for="thumbnail"> Imagen:</label>
+    <input type="text" name="thumbnail" id="thumbnail"><br/><br/>
+    <label for="code"> Código:</label>
+    <input type="text" name="code" id="code"><br/><br/>
+    <label for="stock"> Stock:</label>
+    <input type="text" name="stock" id="stock"><br/><br/>
+    <label for="category"> Categoría:</label>
+    <select id="category" name="category"><br/><br/>
+        <option value="vinos">Vinos</option>
+        <option value="destilados">Destilados</option>
+        <option value="cervezas">Cervezas</option>
+    </select><br><br>
+    <button type="submit" id="btn-send">Cargar producto</button>
 
-<body>
-    <!--  Formulario para cargar productos  -->
-    <h2>Cargar Productos</h2>
-    <form action="/api/products" method="POST" id="form">
-        <label for="title">Título:</label>
-        <input type="text" id="title" name="title" required><br><br>
+</div>
 
-        <label for="description">Descripción:</label>
-        <input type="text" id="description" name="description" required><br><br>
+<h2>Todos los productos</h2>
+<div>
+    <ol id="productsRealTime">
 
-        <label for="code">Código:</label>
-        <input type="text" id="code" name="code" required><br><br>
-
-        <label for="price">Precio:</label>
-        <input type="text" id="price" name="price" required><br><br>
-
-        <label for="status">Activo:</label>
-        <input type="radio" id="status" name="status" required><br><br>
-
-        <label for="stock">Stock:</label>
-        <input type="text" id="stock" name="stock" required><br><br>
-
-        <label for="category">Categoría:</label>
-        <select id="category" name="category">
-            <option value="vinos">Vinos</option>
-            <option value="destilados">Destilados</option>
-            <option value="cervezas">Cervezas</option>
-        </select><br><br>
-        {{!-- <input type="text" id="category" name="category" required><br><br> --}}
-        <div>
-            <button type="submit" id="btn-add">Cargar producto</button>
-        </div>
-    </form>
-
-    <!--  Listado de los productos en tiempo real -->
-    <h2>Productos Cargados</h2>
-    <ul id="realtimeProductList">
-        {{#each products}}
-        <li>{{id}} - {{title}} - {{price}} - {{description}}</li>
-        <div>
-            <button onclick="deleteProduct('{{_id}}')" data-product-id="{{_id}}">Eliminar</button>
-        </div>
-        {{/each}}
-    </ul>
+    </ol>
+</div>
 
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/index.js"></script>
-</body>
 
-</html>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/indexRT.js"></script>

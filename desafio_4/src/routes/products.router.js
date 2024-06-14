@@ -1,74 +1,80 @@
-import { Router } from 'express';
-const router = Router()
-import ProductManager from '../managers/ProductManager.js'
-const socket = io();
-const productManager = new ProductManager(socket)
+import { Router } from "express";
+const router = Router();
 
 
-// Traer todos los productos con y sin limit
-router.get("/", async (req,res) => {
-    let limit = parseInt(req.query.limit)
+router.get("/", (req, res) => {
+        res.render('home', {})
+})
+
+/*
+router.get("/products", async (req, res) => {
+
     try {
-        const products = await productManager.getProducts()
-        let limitedProducts = [...products]
-
+        const products = await productManager.getProducts();
+        let limit = parseInt(req.query.limit);
         if (limit) {
-            limitedProducts = limitedProducts.slice(0, limit)
-            res.json(limitedProducts)
+            const productsLimit = products.slice(0, limit);
+            res.json(productsLimit);
+        } else {
+            res.json(products);
         }
-        res.json(products);
     } catch (error) {
-        res.status(404).json({ message: "404 - Productos no encontrados" });
+        res.status(404).json({ message: "Error, productos no encontrados" });
     }
 
-})  
+})
 
-// Traer un producto por ID
-router.get("/:pid", async (req,res) => {
+router.get("/products/:pid", async (req, res) => {
+
     try {
         let pid = parseInt(req.params.pid);
         const productById = await productManager.getProductById(pid);
         if (productById) {
-            res.status(200).json(productById);
-        } 
+            res.json(productById);
+        } else {
+            res.status(404).json({ message: "Producto no encontrado por id" });
+        }
     } catch (error) {
-        res.status(404).json({ message: "Producto no encontrado." });
+        res.status(404).json({ message: "Error, producto no encontrado por id" });
     }
+
 })
 
+router.post("/products", async (req, res) => {
 
-// Agregar un producto
-router.post("/", async (req,res) => {
     try {
-        const { title, description, code, price, status, stock, category, thumbnail } = req.body
-        const result = await productManager.addProduct(title, description, code, price, status, stock, category, thumbnail);
-        res.status(200).json(result);
-    } catch (error) {
-        res.status(404).json({ message: "No se pudo agregar el producto." });
+        const result = await productManager.addProduct(req.body);
+        res.status(201).json(result);
     }
+    catch (error) {
+        res.status(404).json({ message: "Error, no se pudo agregar el producto" });
+    }
+
 })
 
-// Editar un producto por ID
-router.put("/:pid", async (req,res) => {
+router.put("/products/:pid", async (req, res) => {
+
     try {
         let pid = parseInt(req.params.pid);
-        const updatedProduct = await productManager.updateProduct(pid,req.body);
-        res.status(200).json(updatedProduct);
-    } catch (error) {
-        res.status(404).json({ message: "No se pudo editar el producto." });
+        const result = await productManager.updateProduct(pid, req.body);
+        res.status(201).json(result);
     }
+    catch (error) {
+        res.status(404).json({ message: "Error, no se pudo actualizar el producto" });
+    }
+
 })
 
-// Eliminar un producto por ID
-router.delete("/:pid", async (req,res) => {
+router.delete("/products/:pid", async (req, res) => {
+
     try {
         let pid = parseInt(req.params.pid);
         const result = await productManager.deleteProduct(pid);
-        res.status(200).json(result);
+        res.status(201).json(result);
     } catch (error) {
-        res.status(404).json({ message: "No se pudo eliminar el producto." });
+        res.status(404).json({ message: "Error, no se pudo eliminar el producto" });
     }
-})
 
+})*/
 
-export default router
+export default router;
